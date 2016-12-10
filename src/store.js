@@ -1,6 +1,6 @@
 import {createStore} from 'redux'
 import reducer from './reducer'
 
-export default function makeStore() {
+export const makeStore = () => {
   return createStore(reducer)
 }
