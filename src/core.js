@@ -6,14 +6,14 @@ export const setQuestions = (state, questions) =>
 export const next = (state) => {
   const questions = state.get('questions')
   return state.merge({
-    current_question: questions.take(1),
+    current_question: questions.get(0),
     questions: questions.skip(1)
   })
 }
 
 export const selectAnswer = (state, answer) => {
   return state.setIn(
-    ['current_question', 'question1', 'selected_answer'],
+    ['current_question', 'selected_answer'],
     answer
   )
 }

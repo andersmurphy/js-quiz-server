@@ -9,16 +9,18 @@ describe('application logic', () => {
 
     it('adds the questions to the state', () => {
       const state = Map()
-      const questions = Map({
-        'question1': Map({
+      const questions = List.of(
+        Map({
+          question: 'question1',
           answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
           })
         }),
-        'question2': Map({
+        Map({
+          question: 'question2',
           answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
           })
         })
-      })
+      )
 
       const nextState = setQuestions(state, questions)
 
@@ -29,22 +31,19 @@ describe('application logic', () => {
 
     it('converts to immutable', () => {
       const state = Map()
-      const questions = {
-        'question1': {
-            answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            }
-        }
-      }
+      const questions = [{
+          question: 'question1',
+          answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}
+        }]
+
 
       const nextState = setQuestions(state, questions)
 
       expect(nextState).to.equal(Map({
-        questions: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            })
-          })
-        })
+        questions: List.of(Map({
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+          }))
       }))
     })
 
@@ -54,108 +53,87 @@ describe('application logic', () => {
 
     it('takes the next question', () => {
       const state = Map({
-        questions: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            })
+        questions: List.of(
+          Map({
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
           }),
-          'question2': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            })
-          })
-        })
+          Map({
+            question: 'question2',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+          }))
       })
 
       const nextState = next(state)
 
       expect(nextState).to.equal(Map({
-        questions: Map({
-            'question2': Map({
-              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-              })
-            })
-          }),
+        questions: List.of(
+            Map({
+              question: 'question2',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
         current_question: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            })
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
           })
-        })
-      }))
+        }))
     })
-
   })
 
   describe('selectAnswer', () => {
 
     it('creates selected answer if not present', () => {
       const state = Map({
-        questions: Map({
-            'question2': Map({
-              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-              })
-            })
-          }),
+        questions: List.of(Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
         current_question: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            })
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
           })
-        })
       })
-      
+
       const nextState = selectAnswer(state, 'answerC')
 
       expect(nextState).to.equal(Map({
-        questions: Map({
-            'question2': Map({
-              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-              })
-            })
-          }),
+        questions: List.of(Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
         current_question: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            }),
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}),
             selected_answer: 'answerC'
           })
-        })
       }))
     })
 
     it('ovewrites existing selected answer if present', () => {
       const state = Map({
-        questions: Map({
-            'question2': Map({
-              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-              })
-            })
-          }),
+        questions: List.of(Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
         current_question: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            }),
-            selected_answer: ' answerA'
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}),
+            selected_answer: 'answerA'
           })
-        })
       })
 
       const nextState = selectAnswer(state, 'answerC')
 
       expect(nextState).to.equal(Map({
-        questions: Map({
-            'question2': Map({
-              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-              })
-            })
-          }),
+        questions: List.of(Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
         current_question: Map({
-          'question1': Map({
-            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
-            }),
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}),
             selected_answer: 'answerC'
           })
-        })
       }))
     })
 
