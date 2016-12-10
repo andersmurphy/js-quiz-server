@@ -108,4 +108,23 @@ describe('reducer', () => {
     }))
   })
 
+  it('can be used with reduce', () => {
+    const actions = [
+      {type: 'SET_QUESTIONS',
+                      questions: [{question: 'question1',
+                                   answers: {'answerA': 10, 'answerB': 5}}]},
+      {type: 'SET_NAME', name: 'Anders'},
+      {type: 'NEXT'},
+      {type: 'SELECT_ANSWER', answer: 'answerB'},
+      {type: 'SELECT_ANSWER', answer: 'answerA'},
+      {type: 'NEXT'},
+    ]
+      const finalState = actions.reduce(reducer, Map())
+
+      expect(finalState).to.equal(fromJS({
+        questions: [],
+        name: 'Anders',
+        total_score: 10
+      }))
+  })
 })
