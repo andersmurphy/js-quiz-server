@@ -11,19 +11,11 @@ describe('application logic', () => {
       const state = Map()
       const questions = Map({
         'question1': Map({
-          answers: Map({
-            'answerA': 0,
-            'answerB': 5,
-            'answerC': 10,
-            'answerD': 15
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
           })
         }),
         'question2': Map({
-          answers: Map({
-            'answerA': 0,
-            'answerB': 5,
-            'answerC': 10,
-            'answerD': 15
+          answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
           })
         })
       })
@@ -39,11 +31,7 @@ describe('application logic', () => {
       const state = Map()
       const questions = {
         'question1': {
-            answers: {
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: {'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             }
         }
       }
@@ -53,11 +41,7 @@ describe('application logic', () => {
       expect(nextState).to.equal(Map({
         questions: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             })
           })
         })
@@ -72,19 +56,11 @@ describe('application logic', () => {
       const state = Map({
         questions: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             })
           }),
           'question2': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             })
           })
         })
@@ -95,21 +71,13 @@ describe('application logic', () => {
       expect(nextState).to.equal(Map({
         questions: Map({
             'question2': Map({
-              answers: Map({
-                'answerA': 0,
-                'answerB': 5,
-                'answerC': 10,
-                'answerD': 15
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
               })
             })
           }),
         current_question: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             })
           })
         })
@@ -124,46 +92,30 @@ describe('application logic', () => {
       const state = Map({
         questions: Map({
             'question2': Map({
-              answers: Map({
-                'answerA': 0,
-                'answerB': 5,
-                'answerC': 10,
-                'answerD': 15
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
               })
             })
           }),
         current_question: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             })
           })
         })
       })
-
+      
       const nextState = selectAnswer(state, 'answerC')
 
       expect(nextState).to.equal(Map({
         questions: Map({
             'question2': Map({
-              answers: Map({
-                'answerA': 0,
-                'answerB': 5,
-                'answerC': 10,
-                'answerD': 15
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
               })
             })
           }),
         current_question: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             }),
             selected_answer: 'answerC'
           })
@@ -175,21 +127,13 @@ describe('application logic', () => {
       const state = Map({
         questions: Map({
             'question2': Map({
-              answers: Map({
-                'answerA': 0,
-                'answerB': 5,
-                'answerC': 10,
-                'answerD': 15
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
               })
             })
           }),
         current_question: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             }),
             selected_answer: ' answerA'
           })
@@ -201,21 +145,13 @@ describe('application logic', () => {
       expect(nextState).to.equal(Map({
         questions: Map({
             'question2': Map({
-              answers: Map({
-                'answerA': 0,
-                'answerB': 5,
-                'answerC': 10,
-                'answerD': 15
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
               })
             })
           }),
         current_question: Map({
           'question1': Map({
-            answers: Map({
-              'answerA': 0,
-              'answerB': 5,
-              'answerC': 10,
-              'answerD': 15
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
             }),
             selected_answer: 'answerC'
           })
