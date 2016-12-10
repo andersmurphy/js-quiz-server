@@ -17,3 +17,6 @@ export const selectAnswer = (state, answer) => {
     answer
   )
 }
+
+export const setName = (state, name) =>
+  state.set('name', name)

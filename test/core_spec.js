@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable'
 import {expect} from 'chai'
 
-import {setQuestions, next, selectAnswer} from '../src/core';
+import {setQuestions, next, selectAnswer, setName} from '../src/core';
 
 describe('application logic', () => {
 
@@ -102,7 +102,7 @@ describe('application logic', () => {
 
   })
 
-  describe('select answer', () => {
+  describe('selectAnswer', () => {
 
     it('creates selected answer if not present', () => {
       const state = Map({
@@ -188,6 +188,65 @@ describe('application logic', () => {
           }),
           selected_answer: 'answerC'
         })
+      }))
+    })
+
+  })
+
+  describe('setName', () => {
+
+    it('creates name if not present', () => {
+        const state = Map({
+          questions: Map({
+              'question2': Map({
+                'answerA': 0,
+                'answerB': 5,
+                'answerC': 10,
+                'answerD': 15
+              })
+            })
+        })
+
+        const nextState = setName(state, 'Anders')
+
+        expect(nextState).to.equal(Map({
+          questions: Map({
+              'question2': Map({
+                'answerA': 0,
+                'answerB': 5,
+                'answerC': 10,
+                'answerD': 15
+              })
+            }),
+          name: 'Anders'
+        }))
+    })
+
+    it('overwrites existing name if present', () => {
+      const state = Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        name: 'Anders'
+      })
+
+      const nextState = setName(state, 'Dan')
+
+      expect(nextState).to.equal(Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        name: 'Dan'
       }))
     })
 
