@@ -5,6 +5,26 @@ import reducer from '../src/reducer'
 
 describe('reducer', () => {
 
+  it('has initial state', () => {
+    const action = {type: 'SET_NAME',
+                        name: 'Anders'}
+
+    const nextState = reducer(undefined, action)
+
+    expect(nextState).to.equal(fromJS({
+      name: 'Anders'
+    }))
+  })
+
+  it('handles unrecognised action', () => {
+    const initialState = Map()
+    const action = {type: 'UNRECOGNISED'}
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(initialState)
+  })
+
   it('handles SET_QUESTIONS', () => {
     const initialState = Map()
     const action = {type: 'SET_QUESTIONS',

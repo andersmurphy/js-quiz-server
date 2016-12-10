@@ -1,4 +1,4 @@
-import {setQuestions, setName, next, selectAnswer} from './core'
+import {setQuestions, setName, next, selectAnswer, INITIAL_STATE} from './core'
 import {Map} from 'immutable'
 
 const actions = Map({
@@ -8,6 +8,6 @@ const actions = Map({
   'SELECT_ANSWER': (state, action) => selectAnswer(state, action.answer)
 })
 
-export default (state, action) => {
+export default (state = INITIAL_STATE, action) => {
   return actions.get(action.type, () => state)(state, action)
 }
