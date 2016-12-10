@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable'
 import {expect} from 'chai'
 
-import {setQuestions} from '../src/core';
+import {setQuestions, next} from '../src/core';
 
 describe('application logic', () => {
 
@@ -9,8 +9,7 @@ describe('application logic', () => {
 
     it('adds the questions to the state', () => {
       const state = Map()
-      const questions = List.of(
-        Map({
+      const questions = Map({
         'question1': Map({
           'answerA': 0,
           'answerB': 5,
@@ -23,7 +22,7 @@ describe('application logic', () => {
           'answerC': 10,
           'answerD': 15
         })
-      }))
+      })
       const nextState = setQuestions(state, questions)
 
       expect(nextState).to.equal(Map({
@@ -33,29 +32,71 @@ describe('application logic', () => {
 
     it('converts to immutable', () => {
       const state = Map()
-      const questions = [
-        {
+      const questions = {
         'question1': {
           'answerA': 0,
           'answerB': 5,
           'answerC': 10,
           'answerD': 15
         }
-      }]
+      }
       const nextState = setQuestions(state, questions)
 
       expect(nextState).to.equal(Map({
-        questions: List.of(
-          Map({
+        questions: Map({
           'question1': Map({
             'answerA': 0,
             'answerB': 5,
             'answerC': 10,
             'answerD': 15
           })
-        }))
+        })
       }))
     })
+
+  })
+
+  describe('next', () => {
+
+    it('takes the next question', () => {
+      const state = Map({
+        questions: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          }),
+          'question2': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          })
+        })
+      })
+      const nextState = next(state)
+
+      expect(nextState).to.equal(Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        current_question: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          })
+        })
+      }))
+    })
+
   })
 
 })
