@@ -13,7 +13,7 @@ export const next = (state) => {
 
 export const selectAnswer = (state, answer) => {
   return state.setIn(
-    ['current_question', 'selected_answer'],
+    ['current_question', 'question1', 'selected_answer'],
     answer
   )
 }
