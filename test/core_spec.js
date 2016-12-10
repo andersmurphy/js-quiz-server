@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable'
 import {expect} from 'chai'
 
-import {setQuestions, next} from '../src/core';
+import {setQuestions, next, selectAnswer} from '../src/core';
 
 describe('application logic', () => {
 
@@ -23,6 +23,7 @@ describe('application logic', () => {
           'answerD': 15
         })
       })
+
       const nextState = setQuestions(state, questions)
 
       expect(nextState).to.equal(Map({
@@ -40,6 +41,7 @@ describe('application logic', () => {
           'answerD': 15
         }
       }
+
       const nextState = setQuestions(state, questions)
 
       expect(nextState).to.equal(Map({
@@ -75,6 +77,7 @@ describe('application logic', () => {
           })
         })
       })
+
       const nextState = next(state)
 
       expect(nextState).to.equal(Map({
@@ -93,6 +96,97 @@ describe('application logic', () => {
             'answerC': 10,
             'answerD': 15
           })
+        })
+      }))
+    })
+
+  })
+
+  describe('select answer', () => {
+
+    it('creates selected answer if not present', () => {
+      const state = Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        current_question: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          })
+        })
+      })
+
+      const nextState = selectAnswer(state, 'answerC')
+
+      expect(nextState).to.equal(Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        current_question: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          }),
+          selected_answer: 'answerC'
+        })
+      }))
+    })
+
+    it('ovewrites existing selected answer if present', () => {
+      const state = Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        current_question: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          }),
+          selected_answer: 'answerA'
+        })
+      })
+
+      const nextState = selectAnswer(state, 'answerC')
+
+      expect(nextState).to.equal(Map({
+        questions: Map({
+            'question2': Map({
+              'answerA': 0,
+              'answerB': 5,
+              'answerC': 10,
+              'answerD': 15
+            })
+          }),
+        current_question: Map({
+          'question1': Map({
+            'answerA': 0,
+            'answerB': 5,
+            'answerC': 10,
+            'answerD': 15
+          }),
+          selected_answer: 'answerC'
         })
       }))
     })

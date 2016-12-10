@@ -10,3 +10,10 @@ export const next = (state) => {
     questions: questions.skip(1)
   })
 }
+
+export const selectAnswer = (state, answer) => {
+  return state.setIn(
+    ['current_question', 'selected_answer'],
+    answer
+  )
+}
