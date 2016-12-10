@@ -8,10 +8,14 @@ export const setName = (state, name) =>
 
 const nextQuestion = (state) => {
   const questions = state.get('questions')
-  return state.merge({
-    current_question: questions.get(0),
-    questions: questions.skip(1)
-  })
+  if (questions.isEmpty()) {
+    return state
+  } else {
+    return state.merge({
+      current_question: questions.get(0),
+      questions: questions.skip(1)
+    })
+  }
 }
 
 const scoreQuestion = (state) => {

@@ -145,6 +145,26 @@ describe('application logic', () => {
           })
         }))
     })
+
+    it('handles questions being empty', () => {
+      const state = Map({
+        questions: List(),
+        total_score: 10,
+        current_question: Map({
+            question: 'question1',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15}),
+            selected_answer: 'answerC'
+          })
+        })
+
+      const nextState = next(state)
+
+      expect(nextState).to.equal(Map({
+        questions: List(),
+        total_score: 20
+        }))
+    })
+
   })
 
   describe('selectAnswer', () => {
