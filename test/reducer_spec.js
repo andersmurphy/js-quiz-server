@@ -83,7 +83,7 @@ describe('reducer', () => {
           })
         })
       ),
-      max_total_score: 30
+      max_score: 30
     }))
   })
 

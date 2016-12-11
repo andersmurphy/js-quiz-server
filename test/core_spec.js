@@ -290,7 +290,7 @@ describe('application logic', () => {
               })
             })
           ),
-          max_total_score: 30
+          max_score: 30
         }))
     })
   })

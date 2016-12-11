@@ -16,7 +16,7 @@ export const setMaxScore = (state) => {
                             .valueSeq()
                             .toArray()
   const highestScore = Math.max.apply(null, scores)
-  return state.set('max_total_score', numberOfQuestions * highestScore)
+  return state.set('max_score', numberOfQuestions * highestScore)
 }
 
 const nextQuestion = (state) => {
