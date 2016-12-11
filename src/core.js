@@ -8,6 +8,9 @@ export const setQuestions = (state, questions) =>
 export const setName = (state, name) =>
   state.set('name', name)
 
+export const setMaxScore = (state, maxScore) =>
+  state.set('max_score', maxScore)
+
 const nextQuestion = (state) => {
   const questions = state.get('questions')
   if (questions.isEmpty()) {

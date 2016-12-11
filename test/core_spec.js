@@ -1,7 +1,7 @@
 import {List, Map} from 'immutable'
 import {expect} from 'chai'
 
-import {setQuestions, next, selectAnswer, setName} from '../src/core';
+import {setQuestions, next, selectAnswer, setName, setMaxScore} from '../src/core';
 
 describe('application logic', () => {
 
@@ -252,6 +252,37 @@ describe('application logic', () => {
       expect(nextState).to.equal(Map({
         questions: Map(),
         name: 'Dan'
+      }))
+    })
+
+  })
+
+  describe('setMaxScore', () => {
+
+    it('creates max score if not present', () => {
+        const state = Map({
+          questions: Map()
+        })
+
+        const nextState = setMaxScore(state, 150)
+
+        expect(nextState).to.equal(Map({
+          questions: Map(),
+          max_score: 150
+        }))
+    })
+
+    it('overwrites existing max score if present', () => {
+      const state = Map({
+        questions: Map(),
+        max_score: 150
+      })
+
+      const nextState = setMaxScore(state, 100)
+
+      expect(nextState).to.equal(Map({
+        questions: Map(),
+        max_score: 100
       }))
     })
 

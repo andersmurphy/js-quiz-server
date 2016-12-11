@@ -51,6 +51,18 @@ describe('reducer', () => {
     }))
   })
 
+  it('handles SET_MAX_SCORE', () => {
+    const initialState = Map()
+    const action = {type: 'SET_MAX_SCORE',
+                    max_score: 150}
+
+    const nextState = reducer(initialState, action)
+
+    expect(nextState).to.equal(fromJS({
+      max_score: 150
+    }))
+  })
+
   it('handles NEXT', () => {
     const initialState = Map({
       questions: List.of(
