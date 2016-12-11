@@ -7,7 +7,7 @@ const actions = Map({
   'SET_NAME': (state, action) => setName(state, action.name),
   'NEXT': (state, action) => next(state),
   'SELECT_ANSWER': (state, action) => selectAnswer(state, action.answer),
-  'SET_MAX_SCORE': (state, action) => setMaxScore(state, action.max_score)
+  'SET_MAX_SCORE': (state, action) => setMaxScore(state)
 })
 
 export default (state = INITIAL_STATE, action) => {

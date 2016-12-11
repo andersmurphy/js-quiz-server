@@ -8,8 +8,16 @@ export const setQuestions = (state, questions) =>
 export const setName = (state, name) =>
   state.set('name', name)
 
-export const setMaxScore = (state, maxScore) =>
-  state.set('max_score', maxScore)
+export const setMaxScore = (state) => {
+  const numberOfQuestions = state.get('questions').size
+  const scores = state.get('questions')
+                            .first()
+                            .get('answers')
+                            .valueSeq()
+                            .toArray()
+  const highestScore = Math.max.apply(null, scores)
+  return state.set('max_total_score', numberOfQuestions * highestScore)
+}
 
 const nextQuestion = (state) => {
   const questions = state.get('questions')

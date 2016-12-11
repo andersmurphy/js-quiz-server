@@ -257,35 +257,42 @@ describe('application logic', () => {
 
   })
 
-  describe('setMaxScore', () => {
+  describe('calculateMaxScore', () => {
 
-    it('creates max score if not present', () => {
+    it('caculates max score if not present', () => {
         const state = Map({
-          questions: Map()
+          questions: List.of(
+            Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+              })
+            }),
+            Map({
+              question: 'question2',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+              })
+            })
+          )
         })
 
-        const nextState = setMaxScore(state, 150)
+        const nextState = setMaxScore(state)
 
         expect(nextState).to.equal(Map({
-          questions: Map(),
-          max_score: 150
+          questions: List.of(
+            Map({
+              question: 'question1',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+              })
+            }),
+            Map({
+              question: 'question2',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15
+              })
+            })
+          ),
+          max_total_score: 30
         }))
     })
-
-    it('overwrites existing max score if present', () => {
-      const state = Map({
-        questions: Map(),
-        max_score: 150
-      })
-
-      const nextState = setMaxScore(state, 100)
-
-      expect(nextState).to.equal(Map({
-        questions: Map(),
-        max_score: 100
-      }))
-    })
-
   })
 
 })
