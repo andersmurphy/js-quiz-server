@@ -1,6 +1,6 @@
 import {fromJS, List, Map} from 'immutable'
 
-export const INITIAL_STATE = Map()
+export const INITIAL_STATE = Map({total_score: 0})
 
 export const setQuestions = (state, questions) =>
   state.set('questions', fromJS(questions))

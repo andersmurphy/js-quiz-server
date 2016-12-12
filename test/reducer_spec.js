@@ -12,7 +12,8 @@ describe('reducer', () => {
     const nextState = reducer(undefined, action)
 
     expect(nextState).to.equal(fromJS({
-      name: 'Anders'
+      name: 'Anders',
+      total_score: 0
     }))
   })
 
