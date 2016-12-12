@@ -161,7 +161,8 @@ describe('reducer', () => {
       expect(finalState).to.equal(fromJS({
         questions: [],
         name: 'Anders',
-        total_score: 10
+        total_score: 10,
+        current_question: Map()
       }))
   })
 })

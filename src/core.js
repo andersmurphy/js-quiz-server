@@ -22,7 +22,7 @@ export const setMaxScore = (state) => {
 const nextQuestion = (state) => {
   const questions = state.get('questions')
   if (questions.isEmpty()) {
-    return state
+    return state.set('current_question', Map())
   } else {
     return state.merge({
       current_question: questions.get(0),
@@ -37,14 +37,18 @@ const scoreQuestion = (state) => {
   return state.update('total_score',
     0,
     totalScore => totalScore + questionScore
-  ).remove('current_question')
+  )
 }
 
 const moveUnansweredQuestion = (state) => {
-  return state.updateIn(['questions'],
-    List(),
-    list => list.push(state.get('current_question'))
-  ).remove('current_question')
+  if(state.get('current_question').isEmpty()) {
+    return state
+  } else {
+    return state.updateIn(['questions'],
+      List(),
+      list => list.push(state.get('current_question'))
+    )
+  }
 }
 
 export const next = (state) => {

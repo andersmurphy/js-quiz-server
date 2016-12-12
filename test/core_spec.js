@@ -146,6 +146,33 @@ describe('application logic', () => {
         }))
     })
 
+    it('empty questions are not moved back into the questions list', () => {
+      const state = Map({
+        questions: List.of(Map({
+              question: 'question2',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            }),
+            Map({
+              question: 'question3',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
+        current_question: Map()
+        })
+
+      const nextState = next(state)
+
+      expect(nextState).to.equal(Map({
+        questions: List.of(Map({
+              question: 'question3',
+              answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+            })),
+        current_question: Map({
+            question: 'question2',
+            answers: Map({'answerA': 0,'answerB': 5,'answerC': 10,'answerD': 15})
+          })
+        }))
+    })
+
     it('handles questions being empty', () => {
       const state = Map({
         questions: List(),
@@ -161,7 +188,8 @@ describe('application logic', () => {
 
       expect(nextState).to.equal(Map({
         questions: List(),
-        total_score: 20
+        total_score: 20,
+        current_question: Map()
         }))
     })
 
