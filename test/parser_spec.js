@@ -13,13 +13,21 @@ describe('parser', () => {
 
     expect(questions).to.equal(List.of(
       Map({
-        question: 'question 1?',
-        answers: Map({'answer A': 15,'answer B': 10,'answer C': 5,'answer D': 0
+        question: 'What do you do when payment is overdue?',
+        answers: Map({
+          'Hit the phones every day until I get paid': 15,
+          'Send an occasional gentle reminder': 10,
+          'Wait and hope for the best': 5,
+          'Sign off my emails to them “regards” rather than “kind regards”. That’ll show ‘em.': 0
         })
       }),
       Map({
-        question: 'question 2?',
-        answers: Map({'answer A': 15,'answer B': 10,'answer C': 5,'answer D': 0
+        question: 'How do you receive payment?',
+        answers: Map({
+          'Cash, credit card or bank transfer': 15,
+          'Cash only': 10,
+          'Cheque': 5,
+          'Camels': 0
         })
       })
     ))
