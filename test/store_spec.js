@@ -7,7 +7,7 @@ describe('store', () => {
 
   it('is a Redux store configured with the correct reducer', () => {
     const store = makeStore()
-    expect(store.getState()).to.equal(Map({total_score: 0}))
+    expect(store.getState()).to.equal(Map({total_score: 0, name: ''}))
 
     store.dispatch({
       type: 'SET_NAME',
