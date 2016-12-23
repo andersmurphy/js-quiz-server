@@ -6,7 +6,9 @@ const extractPoints = (string) =>
   parseInt(string.split(" ")[0])
 
 const createAnswerTupples = (line, header) =>
-  Range(1, 5).map((index) => [line.get(index), extractPoints(header.get(index))])
+  Range(1, 5).reduce((answers, index) =>
+      answers.set(line.get(index), extractPoints(header.get(index))),
+    Map())
 
 const splitsOnCommasNotInQuotes = (line) =>
   line.split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/)
